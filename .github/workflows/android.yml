@@ -3,27 +3,33 @@ name: Android APK Build
 on:
   push:
     branches:
-      - main  # כל פעם שיש commit ל-main יתחיל תהליך הבנייה
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # הריצה תתבצע על מערכת אובונטו
+    runs-on: ubuntu-latest
 
     steps:
-      # צעד ראשון: להוריד את הריפוזיטורי שלך
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # צעד שני: להוריד ולהתקין את Java JDK
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '11'  # בחרנו את גרסת ה-JDK
+          distribution: 'temurin'
+          java-version: '11'
 
-      # צעד שלישי: נפרק את ה־keystore שהעלינו כ־secret ונשמור אותו כקובץ בשם release.keystore
       - name: Decode keystore from secret
         run: echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > release.keystore
 
-      # צעד רביעי: הרצת פקודת gradle כדי לבנות את ה־APK
-      - name: Build the APK
-        run: ./gradlew assembleRelease  # אם יש בעיה בהגדרת הפקודה תוכל להוסיף נתיב למיקום הגראדל
+      - name: Set up Gradle permissions
+        run: chmod +x ./gradlew
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: MyApp-Release
+          path: app/build/outputs/apk/release/app-release.apk

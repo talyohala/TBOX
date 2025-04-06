@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">MovieApp</string>
-    <string name="welcome">ברוך הבא לאפליקציית הסרטים</string>
-    <string name="movies">צפייה בסרטים</string>
-    <string name="live_tv">צפייה בשידור חי</string>
-    <string name="admin_panel">כניסת מנהל</string>
-    <string name="admin_login">התחברות</string>
-</resources>

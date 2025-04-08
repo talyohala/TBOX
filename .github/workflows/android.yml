@@ -49,3 +49,4 @@ jobs:
           curl -F document=@app/build/outputs/apk/release/app-release.apk \
                -F caption="TBOX APK חתום מוכן להורדה" \
                "https://api.telegram.org/bot$BOT_TOKEN/sendDocument?chat_id=$CHAT_ID"
+# updated trigger

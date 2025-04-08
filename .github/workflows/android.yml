@@ -11,7 +11,7 @@ jobs:
 
     env:
       CHAT_ID: 7663483746
-      BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
       KEYSTORE_PASSWORD: at19306102at
       ALIAS_NAME: mykey
       KEY_PASSWORD: at19306102at
@@ -32,6 +32,7 @@ jobs:
 
       - name: Configure gradle properties
         run: |
+          mkdir -p ~/.gradle
           echo "storeFile=keystore.jks" >> ~/.gradle/gradle.properties
           echo "storePassword=$KEYSTORE_PASSWORD" >> ~/.gradle/gradle.properties
           echo "keyAlias=$ALIAS_NAME" >> ~/.gradle/gradle.properties
@@ -47,6 +48,5 @@ jobs:
         if: success()
         run: |
           curl -F document=@app/build/outputs/apk/release/app-release.apk \
-               -F caption="TBOX APK חתום מוכן להורדה" \
+               -F caption="TBOX APK חתום ומוכן להורדה" \
                "https://api.telegram.org/bot$BOT_TOKEN/sendDocument?chat_id=$CHAT_ID"
-# updated trigger

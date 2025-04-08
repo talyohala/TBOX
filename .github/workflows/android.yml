@@ -1,0 +1,51 @@
+name: Build & Sign TBOX APK
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build Release APK
+    runs-on: ubuntu-latest
+
+    env:
+      CHAT_ID: 7663483746
+      BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      KEYSTORE_PASSWORD: at19306102at
+      ALIAS_NAME: mykey
+      KEY_PASSWORD: at19306102at
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Create keystore file
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
+
+      - name: Configure gradle properties
+        run: |
+          echo "storeFile=keystore.jks" >> ~/.gradle/gradle.properties
+          echo "storePassword=$KEYSTORE_PASSWORD" >> ~/.gradle/gradle.properties
+          echo "keyAlias=$ALIAS_NAME" >> ~/.gradle/gradle.properties
+          echo "keyPassword=$KEY_PASSWORD" >> ~/.gradle/gradle.properties
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload to Telegram
+        if: success()
+        run: |
+          curl -F document=@app/build/outputs/apk/release/app-release.apk \
+               -F caption="TBOX APK חתום מוכן להורדה" \
+               "https://api.telegram.org/bot$BOT_TOKEN/sendDocument?chat_id=$CHAT_ID"

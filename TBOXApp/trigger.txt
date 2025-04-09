@@ -1,4 +1,0 @@
-# Trigger build
-# trigger
-# build trigger
-trigger

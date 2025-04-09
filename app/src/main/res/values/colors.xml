@@ -5,10 +5,12 @@
     <color name="colorSecondary">#2196F3</color>
     <color name="colorSecondaryVariant">#1976D2</color>
     <color name="colorOnSecondary">#000000</color>
+
     <color name="colorPrimaryContainer">#C5CAE9</color>
     <color name="colorOnPrimaryContainer">#1A237E</color>
     <color name="colorSecondaryContainer">#BBDEFB</color>
     <color name="colorOnSecondaryContainer">#0D47A1</color>
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="purple_200">#BB86FC</color>

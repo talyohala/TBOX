@@ -2,6 +2,7 @@
     package="com.tbox.app">
 
     <application
+        android:theme="@style/Theme.TBOX"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="TBOX"

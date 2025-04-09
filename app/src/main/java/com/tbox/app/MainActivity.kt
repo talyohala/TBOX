@@ -3,9 +3,12 @@ package com.tbox.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.tbox.app.ui.theme.TBOXTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,10 +16,23 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TBOXTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    Text(text = "Welcome to TBOX Streaming App!")
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    GreetingScreen()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun GreetingScreen() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Welcome to TBOX!")
     }
 }

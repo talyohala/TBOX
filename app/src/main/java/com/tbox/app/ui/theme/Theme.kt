@@ -6,21 +6,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple200,
-    secondary = Teal200,
-    background = Black,
-    surface = Black,
-    onPrimary = White,
-    onSecondary = White,
+    primary = Color(0xFF00BCD4),
+    secondary = Color(0xFF009688),
+    background = Color.Black,
+    surface = Color(0xFF121212),
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onBackground = Color.White,
+    onSurface = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple200,
-    secondary = Teal200,
-    background = White,
-    surface = White,
-    onPrimary = Black,
-    onSecondary = Black,
+    primary = Color(0xFF3F51B5),
+    secondary = Color(0xFF2196F3),
+    background = Color.White,
+    surface = Color.White,
+    onPrimary = Color.White,
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = Color.Black
 )
 
 @Composable
@@ -32,7 +36,7 @@ fun TBOXTheme(
 
     MaterialTheme(
         colorScheme = colors,
-        typography = Typography,
+        typography = Typography(),
         content = content
     )
 }

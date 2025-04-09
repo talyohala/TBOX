@@ -61,3 +61,4 @@ GitHub: [github.com/TalYohala](https://github.com/TalYohala)
 
 אם תרצה שאכין לך לוגו מותאם אישית או תצוגת תפריט וידאו מרשימה – אשמח להכין לך גרסה גרפית או GIF הדגמה.  
 רוצה שאכין לך לוגו נוסף או אנימציית פתיחה?
+// trigger build

@@ -1,23 +1,20 @@
-name: Build & Sign TBOX APK
+name: Android APK Build
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-    name: Build Release APK
+    name: Build APK and Send to Telegram
     runs-on: ubuntu-latest
 
     env:
-      CHAT_ID: 7663483746
-      BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      KEYSTORE_PASSWORD: at19306102at
-      ALIAS_NAME: mykey
-      KEY_PASSWORD: at19306102at
+      JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
 
     steps:
-      - name: Checkout project
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 17
@@ -26,27 +23,26 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Create keystore file
+      - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > my-release-key.jks
 
-      - name: Configure gradle properties
+      - name: Create local.properties
         run: |
-          mkdir -p ~/.gradle
-          echo "storeFile=keystore.jks" >> ~/.gradle/gradle.properties
-          echo "storePassword=$KEYSTORE_PASSWORD" >> ~/.gradle/gradle.properties
-          echo "keyAlias=$ALIAS_NAME" >> ~/.gradle/gradle.properties
-          echo "keyPassword=$KEY_PASSWORD" >> ~/.gradle/gradle.properties
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
-      - name: Grant execute permission for gradlew
+      - name: Grant Permission to Gradlew
         run: chmod +x ./gradlew
 
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
-      - name: Upload to Telegram
-        if: success()
-        run: |
-          curl -F document=@app/build/outputs/apk/release/app-release.apk \
-               -F caption="TBOX APK חתום ומוכן להורדה" \
-               "https://api.telegram.org/bot$BOT_TOKEN/sendDocument?chat_id=$CHAT_ID"
+      - name: Send APK to Telegram
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.CHAT_ID }}
+          token: ${{ secrets.BOT_TOKEN }}
+          document: app/build/outputs/apk/release/app-release.apk
+          message: |
+            האפליקציה מוכנה!
+            נבנתה בהצלחה ונשלחה אליך.

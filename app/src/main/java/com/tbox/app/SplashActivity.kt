@@ -27,12 +27,14 @@ class SplashActivity : ComponentActivity() {
 
             val alphaAnim by animateFloatAsState(
                 targetValue = if (startAnimation) 1f else 0f,
-                animationSpec = tween(durationMillis = 1000), label = ""
+                animationSpec = tween(durationMillis = 1000),
+                label = "alphaAnim"
             )
 
             val scaleAnim by animateFloatAsState(
-                targetValue = if (startAnimation) 1f else 0.8f,
-                animationSpec = tween(durationMillis = 1000), label = ""
+                targetValue = if (startAnimation) 1f else 0.7f,
+                animationSpec = tween(durationMillis = 1000),
+                label = "scaleAnim"
             )
 
             LaunchedEffect(Unit) {
@@ -45,16 +47,16 @@ class SplashActivity : ComponentActivity() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xFF003300)), // ירוק כהה
+                    .background(Color.Black),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_launcher),
-                    contentDescription = "TBOX Logo",
+                    painterResource(id = R.drawable.tbox_logo),
+                    contentDescription = null,
                     modifier = Modifier
                         .size(180.dp)
-                        .alpha(alphaAnim)
                         .scale(scaleAnim)
+                        .alpha(alphaAnim)
                 )
             }
         }

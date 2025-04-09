@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.TBOX" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+    <style name="Theme.TBOX" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
@@ -11,6 +12,7 @@
         <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
         <item name="colorSecondaryContainer">@color/colorSecondaryContainer</item>
         <item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainer</item>
-        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
+
 </resources>

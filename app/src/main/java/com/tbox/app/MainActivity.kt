@@ -3,9 +3,8 @@ package com.tbox.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.tbox.app.navigation.NavigationGraph
 import com.tbox.app.ui.theme.TBOXTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,21 +12,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TBOXTheme {
-                Greeting("TBOX")
+                val navController = rememberNavController()
+                NavigationGraph(navController = navController)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TBOXTheme {
-        Greeting("Android")
     }
 }

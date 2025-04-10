@@ -1,14 +1,13 @@
-// קובץ ראשי – מגדיר buildscript בלבד אם צריך
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-// ריק זה תקין – הקובץ הזה יכול להיות גם בלי כלום אם אין צורך ב־buildscript
+plugins {
+    kotlin("android") version "1.9.23" apply false
+    id("com.android.application") version "8.1.0" apply false
+}
 
-// השורה הבאה הכרחית רק אם תשתמש ב-buildscript ברמת הפרויקט
-// buildscript {
-//     repositories {
-//         google()
-//         mavenCentral()
-//     }
-//     dependencies {
-//         // דוגמה אם תצטרך בעתיד
-//     }
-// }
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}

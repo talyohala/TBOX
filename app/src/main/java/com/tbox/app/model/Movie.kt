@@ -1,9 +1,7 @@
 package com.tbox.app.model
 
 data class Movie(
-    val id: Int,
+    val id: String,
     val title: String,
-    val description: String,
-    val imageUrl: String,
-    val videoUrl: String
+    val url: String
 )

@@ -1,49 +1,38 @@
 package com.tbox.app.viewmodels
 
-import androidx.lifecycle.ViewModel
-import com.tbox.app.models.User
-import java.io.File
 import kotlinx.serialization.*
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.Json
 
-class UserManager : ViewModel() {
-    private val usersFile = File("data/users.json")
-    private var users = mutableListOf<User>()
+@Serializable
+data class User(
+    val id: Int,
+    val name: String,
+    val isAdmin: Boolean
+)
 
-    init {
-        if (usersFile.exists()) {
-            val text = usersFile.readText()
-            users = Json.decodeFromString(text)
-        }
-    }
+class UserManager {
 
-    fun getAllUsers(): List<User> = users
+    private val users = mutableListOf<User>()
 
     fun addUser(user: User) {
         users.add(user)
-        save()
     }
 
-    fun deleteUser(id: String) {
+    fun removeUserById(id: Int) {
         users.removeIf { it.id == id }
-        save()
     }
 
-    fun togglePremium(id: String) {
-        users.find { it.id == id }?.let {
-            it.isPremium = !it.isPremium
-            save()
-        }
+    fun isAdmin(userId: Int): Boolean {
+        return users.find { it.id == userId }?.isAdmin ?: false
     }
 
-    fun toggleAdmin(id: String) {
-        users.find { it.id == id }?.let {
-            it.isAdmin = !it.isAdmin
-            save()
-        }
+    fun serializeUsers(): String {
+        return Json.encodeToString(users)
     }
 
-    private fun save() {
-        usersFile.writeText(Json.encodeToString(users))
+    fun deserializeUsers(json: String) {
+        val decoded = Json.decodeFromString<List<User>>(json)
+        users.clear()
+        users.addAll(decoded)
     }
 }

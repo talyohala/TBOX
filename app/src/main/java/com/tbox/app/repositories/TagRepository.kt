@@ -1,17 +1,30 @@
 package com.tbox.app.repositories
 
-import com.tbox.app.database.daos.TagDao
 import com.tbox.app.models.Tag
-import com.tbox.app.models.toDomain
-import com.tbox.app.models.toEntity
+import kotlinx.coroutines.delay
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class TagRepository @Inject constructor(
-    private val tagDao: TagDao
-) {
-    suspend fun getAllTags(): List<Tag> = tagDao.getAll().map { it.toDomain() }
+@Singleton
+class TagRepository @Inject constructor() {
 
-    suspend fun addTag(tag: Tag) = tagDao.insert(tag.toEntity())
+    private val tags = mutableListOf<Tag>(
+        Tag(1, "אקשן"),
+        Tag(2, "קומדיה"),
+        Tag(3, "דרמה")
+    )
 
-    suspend fun deleteTag(tag: Tag) = tagDao.delete(tag.toEntity())
+    suspend fun getAllTags(): List<Tag> {
+        delay(200)
+        return tags.toList()
+    }
+
+    suspend fun addTag(tag: Tag) {
+        val nextId = (tags.maxByOrNull { it.id }?.id ?: 0) + 1
+        tags.add(tag.copy(id = nextId))
+    }
+
+    suspend fun deleteTag(tag: Tag) {
+        tags.removeIf { it.id == tag.id }
+    }
 }

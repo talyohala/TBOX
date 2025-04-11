@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TagViewModel @Inject constructor(
     private val repository: TagRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _tags = MutableStateFlow<List<Tag>>(emptyList())
     val tags: StateFlow<List<Tag>> = _tags

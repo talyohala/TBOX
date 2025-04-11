@@ -10,5 +10,31 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorSecondary">#03DAC6</color>
+    <color name="colorOnSecondary">#000000</color
+    <resources>
+    <!-- Primary -->
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryVariant">#3700B3</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Secondary -->
+    <color name="colorSecondary">#03DAC6</color>
+    <color name="colorSecondaryVariant">#018786</color>
     <color name="colorOnSecondary">#000000</color>
+
+    <!-- Tertiary -->
+    <color name="colorTertiary">#FFBB86FC</color>
+    <color name="colorOnTertiary">#000000</color>
+
+    <!-- Backgrounds -->
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+
+    <!-- Surface -->
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+
+    <!-- Error -->
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
 </resources>

@@ -4,17 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.tbox.app.screens.tags.TagScreen
+import com.tbox.app.screens.preview.ColorPreviewScreen
 
 @Composable
-fun AppNavHost(navController: NavHostController, startDestination: String = "tags") {
+fun AppNavHost(navController: NavHostController, startDestination: String = "colors") {
     NavHost(navController = navController, startDestination = startDestination) {
-        composable("tags") {
-            TagScreen()
+        composable("colors") {
+            ColorPreviewScreen()
         }
-
-        // בעתיד תוכל להוסיף כאן עוד:
-        // composable("movies") { MovieScreen() }
-        // composable("profile") { ProfileScreen() }
     }
 }

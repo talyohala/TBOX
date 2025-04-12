@@ -7,9 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.tbox.app.ui.theme.TBOXTheme
 
 @Composable
@@ -29,37 +28,31 @@ fun ColorPreviewScreen() {
         "OnError" to MaterialTheme.colorScheme.onError
     )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         colors.forEach { (name, color) ->
-            ColorBox(name = name, color = color)
-        }
-    }
-}
-
-@Composable
-fun ColorBox(name: String, color: Color) {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp),
-        color = color,
-        shape = RoundedCornerShape(12.dp),
-        tonalElevation = 2.dp
-    ) {
-        Box(contentAlignment = Alignment.Center) {
-            Text(text = name, color = MaterialTheme.colorScheme.onBackground)
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                color = color,
+                shape = RoundedCornerShape(12.dp),
+                tonalElevation = 2.dp
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Text(name, color = MaterialTheme.colorScheme.onBackground)
+                }
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewColorScreen() {
+fun ColorPreviewPreview() {
     TBOXTheme {
         ColorPreviewScreen()
     }

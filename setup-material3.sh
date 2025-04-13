@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "יוצר קבצי עיצוב Material3..."
+echo "יוצר ערכות עיצוב Material3..."
 
 mkdir -p app/src/main/res/values
 mkdir -p app/src/main/res/values-night
 
-# themes.xml (Light)
+# === themes.xml ===
 cat > app/src/main/res/values/themes.xml << 'EOF'
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.TBOX" parent="Theme.Material3.Light.NoActionBar">
@@ -19,7 +19,7 @@ cat > app/src/main/res/values/themes.xml << 'EOF'
 </resources>
 EOF
 
-# themes.xml (Night)
+# === themes-night.xml ===
 cat > app/src/main/res/values-night/themes.xml << 'EOF'
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.TBOX" parent="Theme.Material3.Dark.NoActionBar">
@@ -33,7 +33,7 @@ cat > app/src/main/res/values-night/themes.xml << 'EOF'
 </resources>
 EOF
 
-# colors.xml
+# === colors.xml ===
 cat > app/src/main/res/values/colors.xml << 'EOF'
 <resources>
     <color name="colorPrimary">#6750A4</color>
@@ -49,12 +49,28 @@ cat > app/src/main/res/values/colors.xml << 'EOF'
 </resources>
 EOF
 
-# עדכון Manifest אם לא קיים ערך theme
+# === Update AndroidManifest.xml ===
 sed -i '/<application / s|>| android:theme="@style/Theme.TBOX">|' app/src/main/AndroidManifest.xml
 
-echo "מעדכן ל-GitHub..."
+# === Update build.gradle.kts ===
+echo "מוסיף תלויות Material3 אם חסר..."
+
+GRADLE_FILE="app/build.gradle.kts"
+MATERIAL3_DEP='implementation("androidx.compose.material3:material3:1.2.1")'
+
+if ! grep -q "$MATERIAL3_DEP" "$GRADLE_FILE"; then
+    sed -i "/dependencies {/a \    $MATERIAL3_DEP" "$GRADLE_FILE"
+fi
+
+WINDOW_DEP='implementation("androidx.compose.material3:material3-window-size-class:1.1.2")'
+if ! grep -q "$WINDOW_DEP" "$GRADLE_FILE"; then
+    sed -i "/dependencies {/a \    $WINDOW_DEP" "$GRADLE_FILE"
+fi
+
+# === Git push ===
+echo "שולח פוש ל-GitHub..."
 git add .
-git commit -m "Material3: ערכות צבעים, עיצוב, תיקון Manifest"
+git commit -m "Material3 תיקון מלא: צבעים, ערכות, תלויות, Manifest"
 git push origin main --force
 
-echo "הכל הוגדר! אפשר להריץ ./gradlew assembleRelease"
+echo "ההגדרה הושלמה! כעת תוכל להריץ: ./gradlew assembleRelease"

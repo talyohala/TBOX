@@ -44,7 +44,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
-
+}
 dependencies {
     // --- Core & Compose ---
     implementation("androidx.core:core-ktx:1.12.0")
